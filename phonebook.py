@@ -1,7 +1,7 @@
 # phonebook
 # Ayo Akinrinade 08.15.18
 
-import time
+import os
 
 def menu():
 	print("Phonebook")
@@ -50,6 +50,33 @@ def add_contact():
 	menu()
 	
 def remove_contact():
-	print("Unavaiable function --  not started")
-	#in progress
+	print("- Incomplete -\n\n")
+
+	# view all contacts
+
+	phonebook_db = 'phonebook.txt'
+	f = open(phonebook_db, 'r')
+	print("First Name | Last Name | Phone No.")
+	print("==================================")
+	contact_array = f.read()
+	print(contact_array)
+	f.close()
+	print("- End of Contacts -\n")
+
+	# identify contact to delete by phone no.
+
+	f = open(phonebook_db, 'r+')
+	contact_to_del = input("Enter the Phone No. of contact you would like to delete:")
+	for line in f:
+		if contact_to_del in line:
+			line = line.replace(contact_to_del, '')
+		else:
+			f.seek(0)
+			f.truncate()
+			f.write(line)
+	f.close()
+	print("\nDeleted Contact!\n")
+	input("Press ENTER to continue\n\n")
+	menu()
+
 menu()
